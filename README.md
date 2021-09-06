@@ -1,4 +1,4 @@
-#Terraform Version Upgrader
+# Terraform Version Upgrader
 
 This tool is designed to run the necessary steps to upgrade from version 0.12 of terraform to version 1.
 
