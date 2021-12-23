@@ -8,7 +8,7 @@ It will perform the following steps:
 2. Run `terraform 0.13upgrade -yes` to update the terraform files to be compatible with 0.13+
 3. Plan and apply with version 0.13.7 _only_ if there are no changes in the plan
 4. Plan and apply with version 0.14.11 _only_ if there are no changes in the plan
-5. Plan and apply with version 1.0.5 _only_ if there are no changes in the plan
+5. Plan and apply with version 1.1.2 _only_ if there are no changes in the plan
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ sh build.sh
 sh run.sh TERRAFORM_DIR WORKSPACE
 ```
 
-Example: `sh run.sh "c:\Users\tim.borrowdale\code\web-gateway\deploy\terraform" qa` would upgrade the web-gateway terraform to be compatible with 0.13+ and migrate the state to version 1.0.5
+Example: `sh run.sh "c:\Users\tim.borrowdale\code\web-gateway\deploy\terraform" qa` would upgrade the web-gateway terraform to be compatible with 0.13+ and migrate the state to version 1.1.2
 
 ## Authentication
 
@@ -56,7 +56,7 @@ If, like many of Zutos ECS applications, your project uses terraform workspaces 
 ```sh
 cd /c/Users/tim.borrowdale/code
 git clone git@github.com:zuto/web-gateway.git
-echo service_version = "1.0.17" > web-gateway/deploy/terraform/terraform.tfvars
+echo service_version = "\"1.0.17\"" > web-gateway/deploy/terraform/terraform.tfvars
 git clone git@github.com:zuto/terraform-upgrader.git
 cd terraform-upgrader
 sh build.sh

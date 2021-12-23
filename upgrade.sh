@@ -1,5 +1,3 @@
-#!/bin/bash
-
 eval $(ssh-agent -s)
 chmod 0700 /ssh/$GIT_SSH_KEY
 ssh-add /ssh/$GIT_SSH_KEY
@@ -30,44 +28,44 @@ if [ $STARTVER -le 13 ] ; then
   /usr/bin/terraform/$TFVER/terraform init -reconfigure
   /usr/bin/terraform/$TFVER/terraform workspace select $1
   /usr/bin/terraform/$TFVER/terraform 0.13upgrade -yes
-  /usr/bin/terraform/$TFVER/terraform plan -detailed-exitcode
+  /usr/bin/terraform/$TFVER/terraform apply << EOF
+no
+EOF
   if [ $? -ne 0 ]; then
-    echo "[$TFVER] Plan resulted in changes - please manually apply/discard these changes and rerun this image"
+    echo "[$TFVER] Apply requested input, either for variables or because changes would have been made if confirmed - please review and rerun this image"
     exit 1
   fi
-  echo "[$TFVER] Applying empty plan"
-  /usr/bin/terraform/$TFVER/terraform apply
   echo "[$TFVER] Done"
   echo ""
 fi
 
 if [ $STARTVER -le 14 ]; then
   TFVER=0.14.11
-  echo "[$TFVER] Run plan/apply with 0.14"
+  echo "[$TFVER] Try to apply with 0.14"
   /usr/bin/terraform/$TFVER/terraform init -reconfigure
   /usr/bin/terraform/$TFVER/terraform workspace select $1
-  /usr/bin/terraform/$TFVER/terraform plan -detailed-exitcode
+  /usr/bin/terraform/$TFVER/terraform apply << EOF
+no
+EOF
   if [ $? -ne 0 ]; then
-    echo "[$TFVER] Plan resulted in changes - please manually apply/discard these changes and rerun this image"
+    echo "[$TFVER] Apply requested input, either for variables or because changes would have been made if confirmed - please review and rerun this image"
     exit 1
   fi
-  echo "[$TFVER] Applying empty plan"
-  /usr/bin/terraform/$TFVER/terraform apply
   echo "[$TFVER] Done"
   echo ""
 fi 
 
 TFVER=$TF_VER_LATEST
-echo "[$TFVER] Run plan/apply with $TFVER"
+echo "[$TFVER] Try to apply with $TFVER"
 /usr/bin/terraform/$TFVER/terraform init -reconfigure
 /usr/bin/terraform/$TFVER/terraform workspace select $1
-/usr/bin/terraform/$TFVER/terraform plan -detailed-exitcode
+/usr/bin/terraform/$TFVER/terraform apply << EOF
+no
+EOF
 if [ $? -ne 0 ]; then
-  echo "[$TFVER] Plan resulted in changes - please manually apply/discard these changes and rerun this image"
+  echo "[$TFVER] Apply requested input, either for variables or because changes would have been made if confirmed - please review and rerun this image"
   exit 1
 fi
-echo "[$TFVER] Applying empty plan"
-/usr/bin/terraform/$TFVER/terraform apply
 echo "[$TFVER] Done"
 
 

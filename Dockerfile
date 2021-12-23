@@ -15,7 +15,7 @@ RUN unzip terraform_0.14.11_linux_amd64.zip && rm terraform_0.14.11_linux_amd64.
 RUN mkdir -p /usr/bin/terraform/0.14.11/
 RUN mv terraform /usr/bin/terraform/0.14.11/terraform
 
-ENV TF_VER_LATEST=1.0.5
+ENV TF_VER_LATEST=1.1.2
 
 RUN wget https://releases.hashicorp.com/terraform/$TF_VER_LATEST/terraform_${TF_VER_LATEST}_linux_amd64.zip
 RUN unzip terraform_${TF_VER_LATEST}_linux_amd64.zip && rm terraform_${TF_VER_LATEST}_linux_amd64.zip
